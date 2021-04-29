@@ -82,7 +82,7 @@ function add_item() {
         num_foods++;
         document.getElementById("menu-list").appendChild(new_menu);
         document.getElementById("new-menu-item").reset();
-        var oForm = document.getElementById("pizza");
+        var oForm = document.getElementById("fries-s");
         var clone = oForm.cloneNode(true);
         clone.setAttribute("id", name);
         clone.setAttribute("oninput", "item_cost(" + String(price) + ", " + String(num_foods - 1) + ")");
