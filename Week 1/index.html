@@ -8,6 +8,7 @@
 <head>
     <meta charset="utf-8">
     <title>Restaurant App</title>
+    <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="script.js"></script>
@@ -81,21 +82,33 @@
                 <label for="pop"><input id="pop" type="text" placeholder="0" size="1" maxlength="3"
                         oninput="item_cost(1.75, 9)"></label><br>
             </form>
-            <h3>Subtotal<span style="float:right" id="subtotal"></span></h3>
-            <h3>Taxes (13%)<span style="float:right" id="taxes"></span></h3>
-            <h3>Tip (Optional)<span style="float:right" id="tip">
+            <h3>Subtotal<span style="float: right;" id="subtotal"></span></h3>
+            <h3>Taxes (13%)<span style="float: right;" id="taxes"></span></h3>
+            <h3>Tip (Optional)<span style="float: right;" id="tip">
                     <form id="tip-form">
                         <label for="tip-amount">
-                            <input type="text" id="tip-amount" placeholder="$0.00" size="3" , maxlength="5"
+                            <input type="text" id="tip-amount" placeholder=" $0.00" size="3" , maxlength="5"
                                 oninput="total_cost()">
                         </label>
                     </form>
                 </span></h3>
-            <h3>Final Total<span style="float:right" id="final_total"></span></h3>
-            <button onclick="send_order()">Submit</button>
-        </div>
-    </div>
 
+            <h3>Final Total<span style="float: right;" id="final_total"></span></h3>
+            <label for="split-check">
+                <input type="checkbox" id="split-check" style="float: left;" onchange="show_split()">
+                <p>Split Check?</p>
+            </label><br>
+
+            <div id="split-menu">
+                <h3>Party A <span style="float: right;"><input type="text" id="split-a" placeholder="    $0.00" size="5"
+                            maxlength="5" oninput="party_b()"></span></h3>
+                <h3>Party B <p id="split-b" style="float: right; text-align: right; margin-right: 0px;">$0.00</p>
+                </h3>
+            </div>
+            <button onclick="send_order()" style="float: right;">Submit</button>
+        </div>
+
+    </div>
 </body>
 
 
