@@ -2,6 +2,9 @@ num_foods = 10;
 function send_order() {
     document.getElementById("amount").reset();
     document.getElementById("tip-form").reset();
+    document.getElementById("split-check").checked = false;
+    show_split();
+
     alert("Your order was sent!");
     for (var i = 0; i < num_foods; i++) {
         document.getElementById(String(i)).innerHTML = "$0.00";
@@ -84,10 +87,14 @@ function add_item() {
         document.getElementById("new-menu-item").reset();
         var oForm = document.getElementById("fries-s");
         var clone = oForm.cloneNode(true);
+
         clone.setAttribute("id", name);
+        clone.value = "";
         clone.setAttribute("oninput", "item_cost(" + String(price) + ", " + String(num_foods - 1) + ")");
+
         document.getElementById("amount").appendChild(clone);
         document.getElementById("amount").appendChild(document.createElement("br"));
+
         var p = document.createElement("p");
         p.innerHTML = "$0.00";
         p.setAttribute("id", String(num_foods - 1));
@@ -96,13 +103,47 @@ function add_item() {
     }
 }
 
+function show_split() {
+    document.getElementById("split-a").value = "";
+    document.getElementById("split-b").innerHTML = "$0.00";
+    if (document.getElementById("split-check").checked) {
+        document.getElementById("split-menu").style.display = "block";
+    }
+    else {
+        document.getElementById("split-menu").style.display = "none";
+    }
+
+}
+
+function party_b() {
+    var party_a = parseFloat(document.getElementById("split-a").value);
+    total = document.getElementById("final_total").innerHTML;
+    total = parseFloat(total.substr(1));
+    var party_b = total - party_a;
+    if (party_b < 0) {
+        party_b = 0;
+        alert("You can't pay more than what is owed!")
+        document.getElementById("split-b").innerHTML = "$0.00";
+        return;
+    }
+    if (!isNaN(party_a)) {
+        document.getElementById("split-b").innerHTML = "$" + String(party_b.toFixed(2));
+    }
+    else {
+        document.getElementById("split-b").innerHTML = "$0.00";
+    }
+}
+
 window.onload = function () {
     document.getElementById("amount").reset();
     document.getElementById("tip-form").reset();
+    document.getElementById("split-check").checked = false;
+    show_split();
     for (var i = 0; i < num_foods; i++) {
         document.getElementById(String(i)).innerHTML = "$0.00";
     }
     document.getElementById("subtotal").innerHTML = "$0.00";
     document.getElementById("taxes").innerHTML = "$0.00";
     document.getElementById("final_total").innerHTML = "$0.00";
+
 }
