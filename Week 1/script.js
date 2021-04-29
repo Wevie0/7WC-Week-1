@@ -14,7 +14,9 @@ function send_order() {
 function item_cost(cost, index) {
     var item_cost = 0;
     var item_list = document.getElementById("amount");
-    item_cost += item_list.elements[index].value * cost;
+    if (item_list.elements[index].value > 0) {
+        item_cost += item_list.elements[index].value * cost;
+    }
     document.getElementById(String(index)).innerHTML = "$" + String(item_cost.toFixed(2));
     subtotal();
 }
@@ -46,6 +48,10 @@ function total_cost() {
     else {
         tip = 0;
     }
+
+    if (tip < 0) {
+        tip = 0;
+    }
     var subtotal = parseFloat(document.getElementById("subtotal").innerHTML.substr(1));
     var tax = parseFloat(document.getElementById("taxes").innerHTML.substr(1));
     document.getElementById("final_total").innerHTML = "$" + String((tip + subtotal + tax).toFixed(2));
@@ -58,6 +64,36 @@ function print_menu() {
     document.body.innerHTML = printContents;
     window.print();
     document.body.innerHTML = originalContents;
+}
+
+function print_receipt() {
+
+}
+
+function add_item() {
+
+    var new_menu = document.createElement("li");
+    var name = document.getElementById("new-item-name");
+    var price = document.getElementById("new-item-price");
+    name = name.value;
+    price = price.value;
+    new_menu.innerHTML = name + '<span style="float:right"> $' + parseFloat(price).toFixed(2) + "</span>";
+    if (name && price) {
+        num_foods++;
+        document.getElementById("menu-list").appendChild(new_menu);
+        document.getElementById("new-menu-item").reset();
+        var oForm = document.getElementById("pizza");
+        var clone = oForm.cloneNode(true);
+        clone.setAttribute("id", name);
+        clone.setAttribute("oninput", "item_cost(" + String(price) + ", " + String(num_foods - 1) + ")");
+        document.getElementById("amount").appendChild(clone);
+        document.getElementById("amount").appendChild(document.createElement("br"));
+        var p = document.createElement("p");
+        p.innerHTML = "$0.00";
+        p.setAttribute("id", String(num_foods - 1));
+        p.setAttribute("style", "float: right");
+        document.getElementById("item-prices").appendChild(p);
+    }
 }
 
 window.onload = function () {
