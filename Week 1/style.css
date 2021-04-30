@@ -22,8 +22,7 @@ h3 {
 
 p {
     font-family: "Roboto", "sans-serif";
-    font-size: 14px;
-    display: inline;
+    font-size: 16px;
     position: relative;
     clear: both;
     margin: 10px;
@@ -32,18 +31,23 @@ p {
 
 li {
     font-family: "Roboto", "sans-serif";
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 form {
-    line-height: 20px;
     position: relative;
     clear: both;
 }
 input {
     height : 15px;
 }
+
+label {
+    font-family: "Roboto", "sans-serif";
+    font-size: 14px;
+}
+
 
 .card {
     display: flex;
@@ -60,10 +64,27 @@ input {
 
 #menu {
     background-color: #99EA86;
-    width: 90%;
 }
 
 #current-order {
     background-color: #83D6B7;
-    flex: 1 0 0%;
+    flex: 3 0 0%;
+}
+
+#item-names {
+    float: left;
+    width: 50%;
+}
+
+#item-names p{
+    font-size: 16px;
+    float: left;
+}
+#item-forms {
+    float: left;
+    width: 25%;
+}
+#item-prices {
+    width: 25%;
+    float: right;
 }
